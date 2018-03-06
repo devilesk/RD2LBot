@@ -21,6 +21,8 @@ class ClapEmote:
         ret = ""
         message = ctx.message.content
         message_split = message.split(' ')[1:]
+        if len(message_split) == 1:
+            message_split = list(message_split)
         last = 0
         for index, part in enumerate(message_split):
             ret += (self.middle_fingers[index % 6] + part + " ")
