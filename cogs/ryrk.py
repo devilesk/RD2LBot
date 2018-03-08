@@ -22,7 +22,7 @@ class ClapEmote:
         message = ctx.message.content
         message_split = message.split(' ')[1:]
         first_word = message_split[0]
-        if len(message_split) == 1 and not first_word.startswith(":"):
+        if len(message_split) == 1 and not first_word.startswith("<"):
             message_split = list(first_word)
         last = 0
         for index, part in enumerate(message_split):
