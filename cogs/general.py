@@ -323,31 +323,31 @@ class General:
  #       except:
  #           await self.bot.say("Error.") 
 
-      @commands.command(pass_context=True, no_pm=True)
-      async def poll(self, ctx, *text):
-         """Starts/stops a poll
+    @commands.command(pass_context=True, no_pm=True)
+    async def poll(self, ctx, *text):
+        """Starts/stops a poll
  
-         Usage example:
-         poll Is this a poll?;Yes;No;Maybe
-         poll stop"""
-         message = ctx.message
-         if len(text) == 1:
-             if text[0].lower() == "stop":
-                 await self.endpoll(message)
-                 return
-         if not self.getPollByChannel(message):
-             check = " ".join(text).lower()
-             if "@everyone" in check or "@here" in check:
-                 await self.bot.say("Nice try.")
-                 return
-             p = NewPoll(message, " ".join(text), self)
-             if p.valid:
-                 self.poll_sessions.append(p)
-                 await p.start()
-             else:
-                 await self.bot.say("poll question;option1;option2 (...)")
-         else:
-             await self.bot.say("A poll is already ongoing in this channel.")
+        Usage example:
+        poll Is this a poll?;Yes;No;Maybe
+        poll stop"""
+        message = ctx.message
+        if len(text) == 1:
+            if text[0].lower() == "stop":
+                await self.endpoll(message)
+                return
+        if not self.getPollByChannel(message):
+            check = " ".join(text).lower()
+            if "@everyone" in check or "@here" in check:
+                await self.bot.say("Nice try.")
+                return
+            p = NewPoll(message, " ".join(text), self)
+            if p.valid:
+                self.poll_sessions.append(p)
+                await p.start()
+            else:
+                await self.bot.say("poll question;option1;option2 (...)")
+        else:
+            await self.bot.say("A poll is already ongoing in this channel.")
 
     async def endpoll(self, message):
         if self.getPollByChannel(message):
