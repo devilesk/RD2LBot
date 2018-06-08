@@ -1,4 +1,5 @@
 import logging
+import os
 
 import discord
 from discord.ext import commands
@@ -16,3 +17,13 @@ class RD2LMemes:
         """Posts an image"""
         
         await self.bot.send_file(ctx.message.channel, 'data/rd2lmemes/' + filename)
+        
+def check_folders():
+    if not os.path.exists("data/rd2lmemes"):
+        print("Creating data/rd2lmemes folder...")
+        os.makedirs("data/rd2lmemes")
+        
+def setup(bot):
+    check_folders()
+    cog = RD2LMemes(bot)
+    bot.add_cog(cog)
